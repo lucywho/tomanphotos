@@ -1,6 +1,6 @@
 :root {
     --main-bg-color: antiquewhite;
-    --main-text-color: green;
+    --main-text-color: darkgreen;
 }
 
 html,
@@ -30,26 +30,50 @@ a {
     text-align: center;
     font-weight: bold;
     font-size: 3rem;
+    padding: 5px;
 }
 
 /* holding code for images */
 .contentbox {
-    width: 100%;
+    width: 98%;
     height: fit-content;
-    min-height: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+}
+
+.photobox {
+    height: 500px;
+
+    width: 33%;
+    width: 33vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    margin: 2px 5px;
     border: 1px solid var(--main-text-color);
+    border-radius: 10px;
 }
 
 .title {
-    color: black;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .photo {
-    width: 200px;
+    overflow: hidden;
+    display: cover;
 }
 
 .info {
-    text-align: center;
+    font-size: 1rem;
+}
+
+.holding {
+    color: gray;
 }
 
 @media (prefers-color-scheme: dark) {

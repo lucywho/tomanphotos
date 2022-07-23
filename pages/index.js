@@ -5,7 +5,9 @@ import { getPhotos } from "lib/data"
 export default function Home({ photos }) {
     return (
         <>
-            <Photos photos={photos} />
+            <div className="contentbox">
+                <Photos photos={photos} />
+            </div>
         </>
     )
 }
