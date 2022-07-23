@@ -32,6 +32,26 @@ a {
     font-size: 3rem;
 }
 
+/* holding code for images */
+.contentbox {
+    width: 100%;
+    height: fit-content;
+    min-height: 200px;
+    border: 1px solid var(--main-text-color);
+}
+
+.title {
+    color: black;
+}
+
+.photo {
+    width: 200px;
+}
+
+.info {
+    text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;

@@ -1,7 +1,22 @@
-export default function Home() {
+import prisma from "lib/prisma"
+import Photos from "components/Photos"
+import { getPhotos } from "lib/data"
+
+export default function Home({ photos }) {
     return (
         <>
-            <h1>Home holding text</h1>
+            <Photos photos={photos} />
         </>
     )
+}
+
+export async function getServerSideProps() {
+    let photos = await getPhotos(prisma)
+    photos = JSON.parse(JSON.stringify(photos))
+
+    return {
+        props: {
+            photos: photos,
+        },
+    }
 }
