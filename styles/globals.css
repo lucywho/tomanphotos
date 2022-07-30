@@ -1,6 +1,6 @@
 :root {
-    --main-bg-color: antiquewhite;
-    --main-text-color: green;
+    --main-bg-color: #0f191a;
+    --main-text-color: #effbf5;
 }
 
 html,
@@ -24,32 +24,51 @@ a {
 
 #strapline {
     width: 100%;
-    color: var(--main-bg-color);
-    background-color: var(--main-text-color);
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    border-bottom: 1px solid var(--main-text-color);
     height: fit-content;
     text-align: center;
     font-weight: bold;
     font-size: 3rem;
+    padding: 5px;
 }
 
-/* holding code for images */
 .contentbox {
-    width: 100%;
-    height: fit-content;
-    min-height: 200px;
-    border: 1px solid var(--main-text-color);
+    width: 95%;
+    width: 95vw;
+    margin: 0 auto;
+    min-height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+}
+
+.photobox {
+    height: 300px;
+    background-color: var(--main-text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 .title {
-    color: black;
-}
-
-.photo {
-    width: 200px;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .info {
-    text-align: center;
+    font-size: 1rem;
+}
+
+.holding {
+    color: gray;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -59,5 +78,11 @@ a {
     body {
         color: white;
         background: black;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .contentbox {
+        justify-content: center;
     }
 }
