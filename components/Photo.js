@@ -7,8 +7,7 @@ export default function Photo({ photo }) {
     return (
         <div className="photobox">
             <Link href={`/photo/${photo.id}`}>
-                <>
-                    <p>{photo.id}</p>
+                <a>
                     {photo.title ? (
                         <p className="title">{photo.title}</p>
                     ) : (
@@ -20,17 +19,12 @@ export default function Photo({ photo }) {
                             className="thumbnail"
                             alt="thumbnail"
                             src={link}
-                            height="200"
-                            width="200"
+                            height={220}
+                            width={220}
+                            objectFit="cover"
                         />
                     )}
-
-                    {photo.info ? (
-                        <p className="info">{photo.info}</p>
-                    ) : (
-                        <p className="info holding">no information</p>
-                    )}
-                </>
+                </a>
             </Link>
         </div>
     )
