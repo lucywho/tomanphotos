@@ -5,7 +5,7 @@ export default function Photo({ photo }) {
     const link = "https://toman-test.s3.eu-central-1.amazonaws.com/" + photo.url
 
     return (
-        <div className="photobox">
+        <div className="thumbnail-container">
             <Link href={`/photo/${photo.id}`}>
                 <a>
                     {photo.title ? (
@@ -17,7 +17,7 @@ export default function Photo({ photo }) {
                     {photo.url && (
                         <Image
                             className="thumbnail"
-                            alt="thumbnail"
+                            alt={photo.title}
                             src={link}
                             height={220}
                             width={220}
