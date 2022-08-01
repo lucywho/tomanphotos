@@ -6,7 +6,9 @@ export default function Photo({ photo }) {
     let link
 
     if (photo != null) {
-        link = "https://toman-test.s3.eu-central-1.amazonaws.com/" + photo.url
+        link =
+            "https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/" +
+            photo.url
     } else {
         return
     }
