@@ -2,13 +2,14 @@ import Link from "next/link"
 import Image from "next/image"
 
 export default function Photo({ photo }) {
-    const link = "https://toman-test.s3.eu-central-1.amazonaws.com/" + photo.url
+    const link =
+        "https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/" +
+        photo.url
 
     return (
-        <div className="photobox">
+        <div className="thumbnail-container">
             <Link href={`/photo/${photo.id}`}>
-                <>
-                    <p>{photo.id}</p>
+                <a>
                     {photo.title ? (
                         <p className="title">{photo.title}</p>
                     ) : (
@@ -18,19 +19,14 @@ export default function Photo({ photo }) {
                     {photo.url && (
                         <Image
                             className="thumbnail"
-                            alt="thumbnail"
+                            alt={photo.title}
                             src={link}
-                            height="200"
-                            width="200"
+                            height={220}
+                            width={220}
+                            objectFit="cover"
                         />
                     )}
-
-                    {photo.info ? (
-                        <p className="info">{photo.info}</p>
-                    ) : (
-                        <p className="info holding">no information</p>
-                    )}
-                </>
+                </a>
             </Link>
         </div>
     )
