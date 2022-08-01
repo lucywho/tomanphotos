@@ -124,6 +124,28 @@ a {
     border: 1px solid var(--strap-text);
 }
 
+.load-more {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 6px 10px;
+    margin: 5px auto;
+    width: fit-content;
+
+    background-color: var(--strap-text);
+    border-radius: 10px;
+    color: var(--main-bg-color);
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.load-more {
+    :hover {
+        color: var(--strap-text);
+        background-color: var(--main-bg-color);
+        border: 1px solid var(--strap-text);
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;
@@ -160,5 +182,10 @@ a {
 
     .reroute {
         position: relative;
+    }
+
+    .load-more {
+        width: 80%;
+        margin: 0 10%;
     }
 }
