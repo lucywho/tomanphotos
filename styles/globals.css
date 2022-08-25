@@ -29,16 +29,41 @@ a {
     box-sizing: border-box;
 }
 
-#strapline {
+#header {
     width: 100%;
     background-color: var(--main-bg-color);
     color: var(--strap-text);
     border-bottom: 1px solid var(--strap-text);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-container: space-between;
+}
+
+#strapline {
     height: fit-content;
-    text-align: center;
     font-weight: bold;
     font-size: 3rem;
     padding: 5px 0 10px 0;
+}
+
+#login {
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 5px 0 10px 0;
+    border: var(--main-text-color) 1px solid;
+    border-radius: 10px;
+}
+
+#login:hover {
+    border: var(--info-color) 1px solid;
+    background-color: var(--main-text-color);
+    color: var(--info-color);
+}
+
+.loading {
+    font-size: 3rem;
+    padding: 10px 0 0 10px;
 }
 
 .contentbox {
