@@ -1,8 +1,9 @@
 :root {
-    --main-bg-color: #090b0b;
-    --main-text-color: #effbf5;
-    --info-color: #c7bcc3;
-    --strap-text: #ccf5ac;
+    --main-bg-color: #090b0b; /* dark grey */
+    --main-text-color: #effbf5; /*very light green*/
+    --info-color: #c7bcc3; /*dusky pink*/
+    --strap-text: #ccf5ac; /*tea green*/
+    --highlight: #a53f2b; /*chinese red*/
 }
 
 html,
@@ -37,33 +38,40 @@ a {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-container: space-between;
+    justify-content: space-between;
+    padding: 10px 0;
 }
 
 #strapline {
     height: fit-content;
     font-weight: bold;
     font-size: 3rem;
-    padding: 5px 0 10px 0;
+    padding: 0 20px;
 }
 
 #login {
+    padding: 0 20px;
+}
+
+.sign-in {
     font-weight: bold;
     font-size: 2rem;
-    padding: 5px 0 10px 0;
-    border: var(--main-text-color) 1px solid;
+    padding: 4px 6px;
+    border: var(--strap-text) 1px solid;
+    background-color: var(--strap-text);
     border-radius: 10px;
 }
 
-#login:hover {
-    border: var(--info-color) 1px solid;
-    background-color: var(--main-text-color);
-    color: var(--info-color);
+.sign-in:hover {
+    border: var(--highlight) 1px solid;
+    background-color: var(--highlight);
+    color: var(--main-bg-color);
 }
 
 .loading {
     font-size: 3rem;
     padding: 10px 0 0 10px;
+    color: var(--strap-text);
 }
 
 .contentbox {
@@ -163,12 +171,10 @@ a {
     margin-left: 5px;
 }
 
-.load-more {
-    :hover {
-        color: var(--strap-text);
-        background-color: var(--main-bg-color);
-        border: 1px solid var(--strap-text);
-    }
+.load-more:hover {
+    border: var(--highlight) 1px solid;
+    background-color: var(--highlight);
+    color: var(--main-bg-color);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -7,12 +7,12 @@ export default function Header() {
     return (
         <>
             <Head>
-                <title>Toman Photos</title>
+                <title>Family Photos</title>
                 <meta name="description" content="family photo site" />
                 <link rel="icon" href="camera.ico" />
             </Head>
             <div id="header">
-                <div id="strapline">Toman Family Photos</div>
+                <div id="strapline">Our Family Photos</div>
                 <div id="login">
                     <Link
                         href={
@@ -20,9 +20,9 @@ export default function Header() {
                         }
                     >
                         {session ? (
-                            <button className="login">sign out</button>
+                            <button className="sign-in">sign out</button>
                         ) : (
-                            <button className="login">sign in</button>
+                            <button className="sign-in">sign in</button>
                         )}
                     </Link>
                 </div>
