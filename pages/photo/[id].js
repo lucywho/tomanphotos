@@ -1,8 +1,10 @@
 import Link from "next/link"
 import prisma from "lib/prisma"
 import { getPhoto } from "lib/data"
+import { useRouter } from "next/router"
 
 export default function Photo({ photo }) {
+    const router = useRouter()
     let link
 
     if (photo != null) {
@@ -28,9 +30,10 @@ export default function Photo({ photo }) {
                     ) : (
                         <p className="info holding">no information</p>
                     )}
-                    <Link href="/">
-                        <div className="reroute">home</div>
-                    </Link>
+
+                    <button className="reroute" onClick={() => router.back()}>
+                        home
+                    </button>
                 </div>
             </div>
         </>
