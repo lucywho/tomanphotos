@@ -1,6 +1,6 @@
 export default function LoadMore({ photos, setPhotos, take }) {
     return (
-        <div className="">
+        <div>
             <button
                 className="load-more"
                 onClick={async () => {
