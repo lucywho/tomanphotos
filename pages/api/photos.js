@@ -1,4 +1,5 @@
 import prisma from "lib/prisma"
+import { addmore } from "lib/config"
 import { getPhotos } from "lib/data.js"
 
 export default async function handler(req, res) {
@@ -6,7 +7,7 @@ export default async function handler(req, res) {
         return res.status(501).end()
     }
 
-    const take = parseInt(req.query.take || 20)
+    const take = parseInt(req.query.take || addmore)
     const cursor = req.query.cursor || null
 
     if (!cursor) {
@@ -14,5 +15,6 @@ export default async function handler(req, res) {
     }
 
     const photos = await getPhotos(prisma, take, { id: cursor })
+
     res.json(photos)
 }

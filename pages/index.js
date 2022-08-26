@@ -2,6 +2,7 @@ import prisma from "lib/prisma"
 import { useState } from "react"
 import { getPhotos } from "lib/data"
 import { useSession } from "next-auth/react"
+import { addmore } from "lib/config"
 
 import Photos from "components/Photos"
 import Loading from "components/Loading"
@@ -17,19 +18,26 @@ export default function Home({ initialPhotos }) {
     }
 
     return (
-        <>
-            <div className="contentbox">
+        <div id="content">
+            <div className="photo-box">
                 <Photos photos={photos} />
             </div>
-            <LoadMore photos={photos} setPhotos={setPhotos} />
-        </>
+            <footer>
+                <LoadMore photos={photos} setPhotos={setPhotos} />
+            </footer>
+        </div>
     )
 }
 
 export async function getServerSideProps() {
-    const take = 20
+    const take = addmore
     let photos = await getPhotos(prisma, take)
-    photos = JSON.parse(JSON.stringify(photos))
+
+    try {
+        photos = JSON.parse(JSON.stringify(photos))
+    } catch (err) {
+        console.log("Error: ", err.message)
+    }
 
     return {
         props: {
