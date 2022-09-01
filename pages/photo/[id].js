@@ -1,11 +1,43 @@
-import Link from "next/link"
-import prisma from "lib/prisma"
 import { getPhoto } from "lib/data"
 import { useRouter } from "next/router"
+import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
+
+import prisma from "lib/prisma"
+import Loading from "components/Loading"
 
 export default function Photo({ photo }) {
     const router = useRouter()
+    const { data: session, status } = useSession()
+    const loading = status === "loading"
+
+    const [title, setPhotoTitle] = useState("")
+    const [info, setPhotoInfo] = useState("")
+    const [admin, setAdmin] = useState(false)
+
     let link
+
+    useEffect(() => {
+        if (session && session.user.isAdmin) {
+            setAdmin(true)
+        }
+
+        if (!photo.title) {
+            setPhotoTitle("no title")
+        } else {
+            setPhotoTitle(photo.title)
+        }
+
+        if (!photo.info) {
+            setPhotoInfo("no info")
+        } else {
+            setPhotoInfo(photo.info)
+        }
+    }, [session, photo.info, photo.title])
+
+    if (loading) {
+        return <Loading />
+    }
 
     if (photo != null) {
         link =
@@ -13,6 +45,91 @@ export default function Photo({ photo }) {
             photo.url
     } else {
         return
+    }
+
+    if (session && admin) {
+        return (
+            <>
+                <div className="photo">
+                    <img className="singlephoto" src={link} alt={photo.title} />
+
+                    <div className="singleinfo">
+                        <form
+                            className="title"
+                            onSubmit={async (e) => {
+                                e.preventDefault()
+                                let id = photo.id
+                                await fetch("/api/edit", {
+                                    body: JSON.stringify({
+                                        title,
+                                        info,
+                                        id,
+                                    }),
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    method: "POST",
+                                })
+                            }}
+                        >
+                            <div>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    className={
+                                        title === "no title"
+                                            ? "title holding"
+                                            : "title"
+                                    }
+                                    placeholder={title}
+                                    onChange={(e) =>
+                                        setPhotoTitle(e.target.value)
+                                    }
+                                />
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    name="info"
+                                    className={
+                                        info === "no info"
+                                            ? "info holding"
+                                            : "info"
+                                    }
+                                    placeholder={info}
+                                    onChange={(e) =>
+                                        setPhotoInfo(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <button
+                                disabled={photo.title ? false : true}
+                                style={
+                                    photo.title
+                                        ? {
+                                              border: "red",
+                                              padding: "2px 4px",
+                                              marginTop: "10px",
+                                          }
+                                        : {
+                                              border: "gray",
+                                              padding: "2px 4px",
+                                              marginTop: "10px",
+                                              color: "gray",
+                                          }
+                                }
+                            >
+                                Update
+                            </button>
+                        </form>
+                    </div>
+                    <button className="reroute" onClick={() => router.back()}>
+                        home
+                    </button>
+                </div>
+            </>
+        )
     }
 
     return (
