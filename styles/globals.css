@@ -64,6 +64,11 @@ a {
     color: var(--main-bg-color);
 }
 
+.admin-notice {
+    padding-right: 5px;
+    color: var(--highlight);
+}
+
 .loading {
     font-size: 3rem;
     padding: 10px 0 0 10px;
@@ -92,7 +97,8 @@ a {
 
 .thumbnail-container {
     height: fit-content;
-    padding: 5px;
+    max-width: 260px;
+    padding: 5px 5px 20px 5px;
     color: var(--main-bg-color);
     background-color: var(--main-text-color);
     display: flex;
@@ -217,10 +223,5 @@ a {
 
     .reroute {
         position: relative;
-    }
-
-    .load-more {
-        width: 80%;
-        margin: 0 10%;
     }
 }

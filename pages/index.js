@@ -10,9 +10,9 @@ import LoadMore from "components/LoadMore"
 
 export default function Home({ initialPhotos }) {
     const { data: session, status } = useSession()
-
-    const [photos, setPhotos] = useState(initialPhotos)
     const loading = status === "loading"
+    const [photos, setPhotos] = useState(initialPhotos)
+
     let admin
 
     if (session) {
@@ -26,7 +26,9 @@ export default function Home({ initialPhotos }) {
     return (
         <div id="content">
             {session && (
-                <div>{admin ? "you are admin" : "you are not admin"}</div>
+                <div className="admin-notice">
+                    {admin ? "" : "Please contact Lucy to get admin rights"}
+                </div>
             )}
             <div className="photo-box">
                 <Photos photos={photos} />
