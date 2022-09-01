@@ -47,13 +47,13 @@ export default function Photo({ photo }) {
         return
     }
 
-    if (session && admin) {
-        return (
-            <>
-                <div className="photo">
-                    <img className="singlephoto" src={link} alt={photo.title} />
+    return (
+        <>
+            <div className="photo">
+                <img className="singlephoto" src={link} alt={photo.title} />
 
-                    <div className="singleinfo">
+                <div className="singleinfo">
+                    {session && admin ? (
                         <form
                             className="title"
                             onSubmit={async (e) => {
@@ -104,54 +104,34 @@ export default function Photo({ photo }) {
                                 />
                             </div>
                             <button
-                                disabled={photo.title ? false : true}
-                                style={
-                                    photo.title
-                                        ? {
-                                              border: "red",
-                                              padding: "2px 4px",
-                                              marginTop: "10px",
-                                          }
-                                        : {
-                                              border: "gray",
-                                              padding: "2px 4px",
-                                              marginTop: "10px",
-                                              color: "gray",
-                                          }
+                                disabled={title ? false : true}
+                                className={
+                                    title !== "no title"
+                                        ? "update-able"
+                                        : "update-disabled"
                                 }
                             >
                                 Update
                             </button>
                         </form>
-                    </div>
-                    <button className="reroute" onClick={() => router.back()}>
-                        home
-                    </button>
-                </div>
-            </>
-        )
-    }
-
-    return (
-        <>
-            <div className="photo">
-                <img className="singlephoto" src={link} alt={photo.title} />
-                <div className="singleinfo">
-                    {photo.title ? (
-                        <p className="title">{photo.title}</p>
                     ) : (
-                        <p className="title holding">no title</p>
+                        <>
+                            {photo.title ? (
+                                <p className="title">{photo.title}</p>
+                            ) : (
+                                <p className="title holding">no title</p>
+                            )}
+                            {photo.info ? (
+                                <p className="info">{photo.info}</p>
+                            ) : (
+                                <p className="info holding">no information</p>
+                            )}
+                        </>
                     )}
-                    {photo.info ? (
-                        <p className="info">{photo.info}</p>
-                    ) : (
-                        <p className="info holding">no information</p>
-                    )}
-
-                    <button className="reroute" onClick={() => router.back()}>
-                        home
-                    </button>
                 </div>
+                <button className="reroute" onClick={() => router.back()}>
+                    home
+                </button>
             </div>
         </>
     )
