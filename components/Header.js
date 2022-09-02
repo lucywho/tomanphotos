@@ -6,6 +6,12 @@ import { useSession } from "next-auth/react"
 export default function Header() {
     const { data: session, status } = useSession()
     const router = useRouter()
+    let admin = false
+
+    if (session && session.user.isAdmin) {
+        admin = true
+    }
+
     return (
         <>
             <Head>
@@ -31,7 +37,7 @@ export default function Header() {
                             )}
                         </Link>
                     )}
-                    {router.asPath !== "/" && session.user.isAdmin && (
+                    {router.asPath !== "/" && admin && (
                         <p>signed in with editing rights</p>
                     )}
                 </div>
