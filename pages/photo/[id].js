@@ -141,6 +141,7 @@ export default function Photo({ photo }) {
                         </button>
                     )}
                 </div>
+                {/* ToDo: set to return to previous page, not home */}
                 <button className="reroute" onClick={() => router.back()}>
                     home
                 </button>
