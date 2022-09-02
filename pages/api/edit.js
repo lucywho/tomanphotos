@@ -26,7 +26,7 @@ export default async function handler(req, res) {
             info: req.body.info,
         },
         where: {
-            id: req.body.id,
+            code: req.body.code,
         },
     })
 

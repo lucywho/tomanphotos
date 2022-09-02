@@ -8,7 +8,7 @@ export default function Photo({ photo }) {
 
     return (
         <div className="thumbnail-container">
-            <Link href={`/photo/${photo.id}`}>
+            <Link href={`/photo/${photo.code}`}>
                 <a>
                     {photo.title ? (
                         <p className="title">{photo.title}</p>
