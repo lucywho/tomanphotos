@@ -14,6 +14,7 @@ export default function Photo({ photo }) {
     const [title, setPhotoTitle] = useState("")
     const [info, setPhotoInfo] = useState("")
     const [admin, setAdmin] = useState(false)
+    const [showForm, setShowForm] = useState(false)
 
     let link
 
@@ -53,23 +54,26 @@ export default function Photo({ photo }) {
                 <img className="singlephoto" src={link} alt={photo.title} />
 
                 <div className="singleinfo">
-                    {session && admin ? (
+                    {showForm ? (
                         <form
                             className="title"
                             onSubmit={async (e) => {
                                 e.preventDefault()
-                                let id = photo.id
+                                let code = photo.code
                                 await fetch("/api/edit", {
                                     body: JSON.stringify({
                                         title,
                                         info,
-                                        id,
+                                        code,
                                     }),
                                     headers: {
                                         "Content-Type": "application/json",
                                     },
                                     method: "POST",
                                 })
+
+                                setShowForm(false)
+                                router.reload()
                             }}
                         >
                             <div>
@@ -127,6 +131,14 @@ export default function Photo({ photo }) {
                                 <p className="info holding">no information</p>
                             )}
                         </>
+                    )}
+                    {admin && (
+                        <button
+                            className="edit"
+                            onClick={() => setShowForm(true)}
+                        >
+                            Edit
+                        </button>
                     )}
                 </div>
                 <button className="reroute" onClick={() => router.back()}>
