@@ -1,6 +1,14 @@
 import { addmore } from "lib/config"
 
-export default function LoadLess({ photos, setPhotos, take }) {
+export default function LoadLess({
+    photos,
+    setPhotos,
+    setShowLess,
+    setShowMore,
+    take,
+}) {
+    take = 0 - take
+
     return (
         <div>
             <button
@@ -15,6 +23,12 @@ export default function LoadLess({ photos, setPhotos, take }) {
                     photos = await res.json()
 
                     setPhotos(photos)
+
+                    setShowMore(true)
+
+                    if (photos.length < take || photos[0].code == 1) {
+                        setShowLess(false)
+                    }
                 }}
             >
                 &lt;&lt;&lt;

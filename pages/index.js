@@ -1,5 +1,5 @@
 import prisma from "lib/prisma"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { getPhotos } from "lib/data"
 import { useSession } from "next-auth/react"
 import { addmore } from "lib/config"
@@ -13,15 +13,10 @@ export default function Home({ photoSet }) {
     const { data: session, status } = useSession()
     const loading = status === "loading"
     const [photos, setPhotos] = useState(photoSet)
-    const [less, setLess] = useState(true)
+    const [showLess, setShowLess] = useState(false)
+    const [showMore, setShowMore] = useState(true)
 
     let admin
-
-    useEffect(() => {
-        if (photos[0].code === 1) {
-            setLess(false)
-        }
-    }, [])
 
     if (session) {
         admin = session.user.isAdmin
@@ -41,17 +36,28 @@ export default function Home({ photoSet }) {
                 <Photos photos={photos} />
             </div>
             <footer className="footer">
-                <LoadLess
-                    photos={photos}
-                    setPhotos={setPhotos}
-                    take={addmore}
-                />
-
-                <LoadMore
-                    photos={photos}
-                    setPhotos={setPhotos}
-                    take={addmore}
-                />
+                {showLess ? (
+                    <LoadLess
+                        photos={photos}
+                        setPhotos={setPhotos}
+                        setShowLess={setShowLess}
+                        setShowMore={setShowMore}
+                        take={addmore}
+                    />
+                ) : (
+                    <button className="filler"></button>
+                )}
+                {showMore ? (
+                    <LoadMore
+                        photos={photos}
+                        setPhotos={setPhotos}
+                        setShowMore={setShowMore}
+                        setShowLess={setShowLess}
+                        take={addmore}
+                    />
+                ) : (
+                    <button className="filler"></button>
+                )}
             </footer>
         </div>
     )

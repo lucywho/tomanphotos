@@ -1,6 +1,10 @@
-export default function LoadMore({ photos, setPhotos, take }) {
-    // const lastCode = photos[photos.length - 1].code
-
+export default function LoadMore({
+    photos,
+    setPhotos,
+    setShowMore,
+    setShowLess,
+    take,
+}) {
     return (
         <div>
             <button
@@ -15,6 +19,11 @@ export default function LoadMore({ photos, setPhotos, take }) {
                     photos = await res.json()
 
                     setPhotos(photos)
+                    setShowLess(true)
+
+                    if (photos.length < take) {
+                        setShowMore(false)
+                    }
                 }}
             >
                 &gt;&gt;&gt;
