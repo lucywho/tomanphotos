@@ -213,6 +213,10 @@ a {
     color: var(--main-bg-color);
 }
 
+.filler {
+    visibility: hidden;
+}
+
 .footer {
     width: 100%;
     display: flex;

@@ -1,6 +1,5 @@
 export default function LoadMore({ photos, setPhotos, take }) {
-    const lastId = photos[photos.length - 1].code
-    console.log("lastID: ", lastId)
+    // const lastCode = photos[photos.length - 1].code
 
     return (
         <div>
@@ -10,7 +9,7 @@ export default function LoadMore({ photos, setPhotos, take }) {
                     const lastPhotoId = photos[photos.length - 1].id
 
                     const res = await fetch(
-                        `/api/photos?${take}&cursor=${lastPhotoId}`
+                        `/api/photos?take=${take}&cursor=${lastPhotoId}`
                     )
 
                     photos = await res.json()

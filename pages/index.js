@@ -1,5 +1,5 @@
 import prisma from "lib/prisma"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { getPhotos } from "lib/data"
 import { useSession } from "next-auth/react"
 import { addmore } from "lib/config"
@@ -13,13 +13,19 @@ export default function Home({ photoSet }) {
     const { data: session, status } = useSession()
     const loading = status === "loading"
     const [photos, setPhotos] = useState(photoSet)
+    const [less, setLess] = useState(true)
 
     let admin
+
+    useEffect(() => {
+        if (photos[0].code === 1) {
+            setLess(false)
+        }
+    }, [])
 
     if (session) {
         admin = session.user.isAdmin
     }
-
     if (loading) {
         return <Loading />
     }
@@ -35,8 +41,17 @@ export default function Home({ photoSet }) {
                 <Photos photos={photos} />
             </div>
             <footer className="footer">
-                <LoadLess photos={photos} setPhotos={setPhotos} />
-                <LoadMore photos={photos} setPhotos={setPhotos} />
+                <LoadLess
+                    photos={photos}
+                    setPhotos={setPhotos}
+                    take={addmore}
+                />
+
+                <LoadMore
+                    photos={photos}
+                    setPhotos={setPhotos}
+                    take={addmore}
+                />
             </footer>
         </div>
     )
