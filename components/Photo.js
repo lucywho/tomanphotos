@@ -9,24 +9,22 @@ export default function Photo({ photo }) {
     return (
         <div className="thumbnail-container">
             <Link href={`/photo/${photo.code}`}>
-                <a>
-                    {photo.title ? (
-                        <p className="title">{photo.title}</p>
-                    ) : (
-                        <p className="title holding">no title</p>
-                    )}
+                {photo.title ? (
+                    <p className="title">{photo.title}</p>
+                ) : (
+                    <p className="title holding">no title</p>
+                )}
 
-                    {photo.url && (
-                        <Image
-                            className="thumbnail"
-                            alt={photo.title}
-                            src={link}
-                            height={220}
-                            width={220}
-                            objectFit="cover"
-                        />
-                    )}
-                </a>
+                {photo.url && (
+                    <Image
+                        className="thumbnail"
+                        alt={photo.title}
+                        src={link}
+                        height={220}
+                        width={220}
+                        objectFit="cover"
+                    />
+                )}
             </Link>
         </div>
     )
