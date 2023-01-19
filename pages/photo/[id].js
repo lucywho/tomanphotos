@@ -39,119 +39,111 @@ export default function Photo({ photo }) {
 
     return (
         <>
-            <div className="photo">
-                <div className="single-info">
-                    {showForm ? (
-                        <form
-                            className="title"
-                            onSubmit={async (e) => {
-                                e.preventDefault()
-                                let code = photo.code
-                                await fetch("/api/edit", {
-                                    body: JSON.stringify({
-                                        title,
-                                        info,
-                                        code,
-                                    }),
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    method: "POST",
-                                })
+            <div className="single-photo-container">
+                {showForm ? (
+                    <form
+                        className="title"
+                        onSubmit={async (e) => {
+                            e.preventDefault()
+                            let code = photo.code
+                            await fetch("/api/edit", {
+                                body: JSON.stringify({
+                                    title,
+                                    info,
+                                    code,
+                                }),
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                method: "POST",
+                            })
 
-                                setShowForm(false)
-                                router.reload()
-                            }}
-                        >
-                            <div>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    className={
-                                        title === "no title"
-                                            ? "title holding"
-                                            : "title"
-                                    }
-                                    placeholder={title}
-                                    onChange={(e) =>
-                                        setPhotoTitle(e.target.value)
-                                    }
-                                />
-                            </div>
-                            <img
-                                className="single-photo"
-                                src={link}
-                                alt={photo.title}
-                            />
-
-                            <div>
-                                <input
-                                    type="text"
-                                    name="info"
-                                    className={
-                                        info === "no info"
-                                            ? "info holding"
-                                            : "info"
-                                    }
-                                    placeholder={info}
-                                    onChange={(e) =>
-                                        setPhotoInfo(e.target.value)
-                                    }
-                                />
-                            </div>
-                            <button
-                                disabled={title ? false : true}
+                            setShowForm(false)
+                            router.reload()
+                        }}
+                    >
+                        <div>
+                            <input
+                                type="text"
+                                name="title"
                                 className={
-                                    title !== "no title"
-                                        ? "update-able"
-                                        : "update-disabled"
+                                    title === "no title"
+                                        ? "title holding"
+                                        : "title"
                                 }
-                            >
-                                Update
-                            </button>
-                        </form>
-                    ) : (
-                        <>
-                            <div className="single-photo-title">
-                                {photo.title ? (
-                                    <p className="title">{photo.title}</p>
-                                ) : (
-                                    <p className="title holding">no title</p>
-                                )}
-                            </div>
-                            <img
-                                className="single-photo"
-                                src={link}
-                                alt={photo.title}
+                                placeholder={title}
+                                onChange={(e) => setPhotoTitle(e.target.value)}
                             />
+                        </div>
+                        <img
+                            className="single-photo"
+                            src={link}
+                            alt={photo.title}
+                        />
 
-                            {photo.info ? (
-                                <p className="info">{photo.info}</p>
+                        <div>
+                            <input
+                                type="text"
+                                name="info"
+                                className={
+                                    info === "no info" ? "info holding" : "info"
+                                }
+                                placeholder={info}
+                                onChange={(e) => setPhotoInfo(e.target.value)}
+                            />
+                        </div>
+                        <button
+                            disabled={title ? false : true}
+                            className={
+                                title !== "no title"
+                                    ? "update-able"
+                                    : "update-disabled"
+                            }
+                        >
+                            Update
+                        </button>
+                    </form>
+                ) : (
+                    <>
+                        <div>
+                            {photo.title ? (
+                                <p className="title">{photo.title}</p>
                             ) : (
-                                <p className="info holding">no information</p>
+                                <p className="title holding">no title</p>
                             )}
-                        </>
-                    )}
-                    {admin && (
-                        <>
-                            {showForm ? (
-                                <button
-                                    className="edit"
-                                    onClick={() => setShowForm(false)}
-                                >
-                                    Cancel
-                                </button>
-                            ) : (
-                                <button
-                                    className="edit"
-                                    onClick={() => setShowForm(true)}
-                                >
-                                    Edit
-                                </button>
-                            )}
-                        </>
-                    )}
-                </div>
+                        </div>
+                        <img
+                            className="single-photo"
+                            src={link}
+                            alt={photo.title}
+                        />
+
+                        {photo.info ? (
+                            <p className="info">{photo.info}</p>
+                        ) : (
+                            <p className="info holding">no information</p>
+                        )}
+                    </>
+                )}
+                {admin && (
+                    <>
+                        {showForm ? (
+                            <button
+                                className="edit"
+                                onClick={() => setShowForm(false)}
+                            >
+                                Cancel
+                            </button>
+                        ) : (
+                            <button
+                                className="edit"
+                                onClick={() => setShowForm(true)}
+                            >
+                                Edit
+                            </button>
+                        )}
+                    </>
+                )}
             </div>
         </>
     )
