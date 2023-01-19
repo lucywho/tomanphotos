@@ -1,10 +1,9 @@
+import prisma from "lib/prisma"
 import { getPhoto } from "lib/data"
 import { useRouter } from "next/router"
+import Loading from "components/Loading"
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-
-import prisma from "lib/prisma"
-import Loading from "components/Loading"
 
 export default function Photo({ photo }) {
     const router = useRouter()
@@ -23,17 +22,9 @@ export default function Photo({ photo }) {
             setAdmin(true)
         }
 
-        if (!photo.title) {
-            setPhotoTitle("no title")
-        } else {
-            setPhotoTitle(photo.title)
-        }
+        photo.title ? setPhotoTitle(photo.title) : setPhotoTitle("no title")
 
-        if (!photo.info) {
-            setPhotoInfo("no info")
-        } else {
-            setPhotoInfo(photo.info)
-        }
+        photo.info ? setPhotoInfo(photo.info) : setPhotoInfo("no info")
     }, [session, photo.info, photo.title])
 
     if (loading) {
@@ -41,9 +32,7 @@ export default function Photo({ photo }) {
     }
 
     if (photo != null) {
-        link =
-            "https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/" +
-            photo.url
+        link = `https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/${photo.url}`
     } else {
         return
     }
@@ -51,9 +40,7 @@ export default function Photo({ photo }) {
     return (
         <>
             <div className="photo">
-                <img className="singlephoto" src={link} alt={photo.title} />
-
-                <div className="singleinfo">
+                <div className="single-info">
                     {showForm ? (
                         <form
                             className="title"
@@ -91,6 +78,11 @@ export default function Photo({ photo }) {
                                     }
                                 />
                             </div>
+                            <img
+                                className="single-photo"
+                                src={link}
+                                alt={photo.title}
+                            />
 
                             <div>
                                 <input
@@ -120,11 +112,19 @@ export default function Photo({ photo }) {
                         </form>
                     ) : (
                         <>
-                            {photo.title ? (
-                                <p className="title">{photo.title}</p>
-                            ) : (
-                                <p className="title holding">no title</p>
-                            )}
+                            <div className="single-photo-title">
+                                {photo.title ? (
+                                    <p className="title">{photo.title}</p>
+                                ) : (
+                                    <p className="title holding">no title</p>
+                                )}
+                            </div>
+                            <img
+                                className="single-photo"
+                                src={link}
+                                alt={photo.title}
+                            />
+
                             {photo.info ? (
                                 <p className="info">{photo.info}</p>
                             ) : (
@@ -133,22 +133,31 @@ export default function Photo({ photo }) {
                         </>
                     )}
                     {admin && (
-                        <button
-                            className="edit"
-                            onClick={() => setShowForm(true)}
-                        >
-                            Edit
-                        </button>
+                        <>
+                            {showForm ? (
+                                <button
+                                    className="edit"
+                                    onClick={() => setShowForm(false)}
+                                >
+                                    Cancel
+                                </button>
+                            ) : (
+                                <button
+                                    className="edit"
+                                    onClick={() => setShowForm(true)}
+                                >
+                                    Edit
+                                </button>
+                            )}
+                        </>
                     )}
                 </div>
-                {/* ToDo: set to return to previous page, not home */}
-                <button className="reroute" onClick={() => router.back()}>
-                    home
-                </button>
             </div>
         </>
     )
 }
+
+//===================================================================
 
 export async function getServerSideProps({ params }) {
     let id = params.id

@@ -31,14 +31,28 @@ export default function Header() {
                             }
                         >
                             {session ? (
-                                <button className="sign-in">sign out</button>
+                                <button className="sign-out">
+                                    <span className="sign-text">sign out</span>
+                                    <span className="sign-out-icon">🙎</span>
+                                </button>
                             ) : (
-                                <button className="sign-in">sign in</button>
+                                <button className="sign-in">
+                                    <span className="sign-text">sign in</span>
+                                    <span className="sign-in-icon">🙎</span>
+                                </button>
                             )}
                         </Link>
                     )}
-                    {router.asPath !== "/" && admin && (
-                        <p>signed in with editing rights</p>
+                    {router.asPath !== "/" && (
+                        <>
+                            {/* ToDo: set to return to previous page, not home */}
+                            <button
+                                className="reroute"
+                                onClick={() => router.back()}
+                            >
+                                home
+                            </button>
+                        </>
                     )}
                 </div>
             </div>
