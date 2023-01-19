@@ -24,6 +24,9 @@ export default async function handler(req, res) {
         data: {
             title: req.body.title,
             info: req.body.info,
+            date: req.body.date,
+            year: req.body.year,
+            decade: req.body.decade,
         },
         where: {
             code: req.body.code,

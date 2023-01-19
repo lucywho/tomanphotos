@@ -16,6 +16,9 @@ model Photo {
   title      String?
   url        String   @unique
   info       String?
+  decade     String?
+  year       String?
+  date       String?
   createdAt  DateTime @default(now())
 }
 

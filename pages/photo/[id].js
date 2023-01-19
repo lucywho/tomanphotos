@@ -12,6 +12,10 @@ export default function Photo({ photo }) {
 
     const [title, setPhotoTitle] = useState("")
     const [info, setPhotoInfo] = useState("")
+    const [decade, setPhotoDecade] = useState("")
+    const [year, setPhotoYear] = useState("")
+    const [date, setPhotoDate] = useState("")
+    const [dateInfo, setDateInfo] = useState("")
     const [admin, setAdmin] = useState(false)
     const [showForm, setShowForm] = useState(false)
 
@@ -22,15 +26,26 @@ export default function Photo({ photo }) {
             setAdmin(true)
         }
 
+        function findDateInfo() {
+            if (photo.date) {
+                setDateInfo(photo.date)
+            } else if (photo.year) {
+                setDateInfo(photo.year)
+            } else if (photo.decade) {
+                setDateInfo(photo.decade)
+            }
+        }
+
         photo.title ? setPhotoTitle(photo.title) : setPhotoTitle("no title")
 
         photo.info ? setPhotoInfo(photo.info) : setPhotoInfo("no info")
-    }, [session, photo.info, photo.title])
+
+        findDateInfo()
+    }, [session, photo])
 
     if (loading) {
         return <Loading />
     }
-
     if (photo != null) {
         link = `https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/${photo.url}`
     } else {
@@ -50,6 +65,9 @@ export default function Photo({ photo }) {
                                 body: JSON.stringify({
                                     title,
                                     info,
+                                    decade,
+                                    year,
+                                    date,
                                     code,
                                 }),
                                 headers: {
@@ -71,7 +89,11 @@ export default function Photo({ photo }) {
                                         ? "title holding"
                                         : "title"
                                 }
-                                placeholder={title}
+                                placeholder={
+                                    title === "no title"
+                                        ? "give this photo a title"
+                                        : title
+                                }
                                 onChange={(e) => setPhotoTitle(e.target.value)}
                             />
                         </div>
@@ -82,14 +104,49 @@ export default function Photo({ photo }) {
                         />
 
                         <div>
-                            <input
+                            <textarea
                                 type="text"
                                 name="info"
                                 className={
                                     info === "no info" ? "info holding" : "info"
                                 }
-                                placeholder={info}
+                                placeholder={
+                                    info === "no info"
+                                        ? "type a description here"
+                                        : info
+                                }
                                 onChange={(e) => setPhotoInfo(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="decade"
+                                className="info"
+                                placeholder={
+                                    decade ? decade : "type a decade e.g. 1970s"
+                                }
+                                onChange={(e) => setPhotoDecade(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="year"
+                                className="info"
+                                placeholder={
+                                    year ? year : "type a year e.g. 1973"
+                                }
+                                onChange={(e) => setPhotoYear(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="date"
+                                name="date"
+                                className="info"
+                                placeholder={date ? date : "date"}
+                                onChange={(e) => setPhotoDate(e.target.value)}
                             />
                         </div>
                         <button
@@ -122,6 +179,12 @@ export default function Photo({ photo }) {
                             <p className="info">{photo.info}</p>
                         ) : (
                             <p className="info holding">no information</p>
+                        )}
+
+                        {dateInfo ? (
+                            <p className="info">Date: {dateInfo}</p>
+                        ) : (
+                            <></>
                         )}
                     </>
                 )}
