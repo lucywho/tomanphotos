@@ -119,15 +119,23 @@ export default function Photo({ photo }) {
                             />
                         </div>
                         <div>
-                            <input
-                                type="text"
+                            <label htmlFor="decades">Select a decade</label>
+                            <select
                                 name="decade"
+                                id="decade"
                                 className="info"
-                                placeholder={
-                                    decade ? decade : "type a decade e.g. 1970s"
-                                }
                                 onChange={(e) => setPhotoDecade(e.target.value)}
-                            />
+                            >
+                                <option label=" "></option>
+                                <option value="1950-59">1950s</option>
+                                <option value="1960-69">1960s</option>
+                                <option value="1970-79">1970s</option>
+                                <option value="1980-89">1980s</option>
+                                <option value="1990-99">1990s</option>
+                                <option value="2000-09">2000s</option>
+                                <option value="2010-19">2010s</option>
+                                <option value="2020-29">2020s</option>
+                            </select>
                         </div>
                         <div>
                             <input
