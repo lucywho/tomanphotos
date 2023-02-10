@@ -1,7 +1,8 @@
+import prisma from "lib/prisma"
 import NextAuth from "next-auth"
+import { updateUserToAdmin } from "lib/data.js"
 import EmailProvider from "next-auth/providers/email"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import prisma from "lib/prisma"
 
 let data
 
@@ -43,6 +44,20 @@ export default NextAuth({
             session.user.id = user.id
             session.user.isAdmin = user.isAdmin
             return Promise.resolve(session)
+        },
+    },
+
+    events: {
+        signIn: async ({ user, isNewUser }) => {
+            if (isNewUser) {
+                const userEmail = user.email
+                const isAdminEmail =
+                    userEmail.split("@")[1] === process.env.ADMIN_EMAIL_DOMAIN
+
+                isAdminEmail
+                    ? await updateUserToAdmin(user.id, prisma, isAdminEmail)
+                    : console.log(`non-Admin domain`)
+            }
         },
     },
 })

@@ -27,11 +27,6 @@ export default function Home({ photoSet }) {
 
     return (
         <div id="content">
-            {session && (
-                <div className="admin-notice">
-                    {admin ? "" : "Please contact Lucy to get admin rights"}
-                </div>
-            )}
             <div className="photo-box">
                 <Photos photos={photos} />
             </div>
