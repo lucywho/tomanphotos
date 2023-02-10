@@ -14,8 +14,11 @@ My parents have 70+ years worth of family photos digitised and saved on thumb dr
 #### This is multi-step process
 
 (1) present the images online in a way that my parents can easily interact with them and add all the essential background information that is currently in their heads.
+
 (2) add sorting and filtering functionality to bring some kind of order to the current chaos.
+
 (3) gradually improve the presentation and navigation as additional information makes it possible to present the images in different ways.
+
 (GoTo 1) actually the sheer number of images, means that this process is going to be iterative, probably for the rest of my life.
 
 The current version is _working towards_ step 1:
