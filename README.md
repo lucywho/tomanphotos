@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Family photos app
 
-## Getting Started
+## Table of Contents
 
-First, run the development server:
+-   [The Challenge](#the-challenge)
+-   [Next Steps](#next-steps)
+-   [Outstanding Issues](#outstanding-issues)
+-   [Built With](#built-with)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### The Challenge
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+My parents have 70+ years worth of family photos digitised and saved on thumb drives in, apparently, no particular order. My BackEnd Guy (aka [Tim Duckett](https://github.com/timd) ) dumped them all into an AWS S3 bucket and scraped them into a database, now I'm trying to present them in a way that makes some kind of sense without freaking out over the sheer number...
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+#### This is multi-step process
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+(1) present the images online in a way that my parents can easily interact with them and add all the essential background information that is currently in their heads.
+(2) add sorting and filtering functionality to bring some kind of order to the current chaos.
+(3) gradually improve the presentation and navigation as additional information makes it possible to present the images in different ways.
+(GoTo 1) actually the sheer number of images, means that this process is going to be iterative, probably for the rest of my life.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The current version is _working towards_ step 1:
 
-## Learn More
+-   It's possible to log in and edit items.
+-   To improve the ease of use for my parents, anyone logging in with our family email domain is automatically given editing rights, so they don't need to go through an additional verification step.
+-   ... that's it so far.
 
-To learn more about Next.js, take a look at the following resources:
+### Next steps
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   Populate database with date information
+-   Default display to date order
+-   Add additional fields such as "people in this photo" or "location"
+-   Build sort and filter functionality
+-   Move sign in and sort/filter buttons to a drop down menu
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Outstanding issues
 
-## Deploy on Vercel
+-   This is a test version and the styling is still fairly basic - designed for viewing on an iPad 6th Gen, looks reasonable on a desktop, looks like crap on a phone.
+-   Footer should be a separate component which conditionally displays Back/Forward buttons or Edit buttons.
+-   The only way out of the single image view is to return to the first page. Navigation sucks in general.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Built with
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
+-   [Amazon S3 bucket](https://aws.amazon.com/s3/) for image storage
+-   Postgres database hosted on [Railway](https://railway.app/)
