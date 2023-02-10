@@ -5,6 +5,7 @@
     --strap-text: #ccf5ac; /*tea green*/
     --highlight: #d5715d; /*chinese red*/
     --header-height: calc(3rem + 80px);
+    --footer-height: calc(2rem + 10px);
 }
 
 * {
@@ -106,17 +107,17 @@ a {
     align-items: flex-end;
     display: flex;
     flex-direction: column;
-    min-height: calc(98vh - var(--header-height));
+    min-height: calc(98vh - (var(--header-height) + var(--footer-height)));
 }
 
 .photo-box {
     align-items: center;
     display: grid;
+    flex: 1;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     height: fit-content;
-    margin: 20px auto;
-    padding: 10px;
+    margin: 0 auto;
     width: fit-content;
 }
 
@@ -129,8 +130,8 @@ a {
     height: fit-content;
     flex-direction: column;
     justify-content: space-between;
-    margin: 10px;
-    padding: 15px;
+    margin: 30px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -144,20 +145,29 @@ a {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: fit-content;
+    min-height: fit-content;
     justify-content: flex-start;
     width: 100%;
 }
 
 input,
-textarea {
+textarea,
+label,
+select {
     font-size: 1.5rem;
-    padding-left: 5px;
+    padding: 5px;
+    margin: 0.5rem 0;
 }
 
 textarea {
     width: fit-content;
 }
+
+label {
+    margin-right: 10px;
+    padding-left: 0;
+}
+
 .title {
     font-size: 2rem;
     font-weight: bold;
@@ -245,6 +255,7 @@ textarea {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    height: var(--footer-height);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -26,9 +26,11 @@ export default function Home({ photoSet }) {
     }
 
     return (
-        <div id="content">
-            <div className="photo-box">
-                <Photos photos={photos} />
+        <>
+            <div id="content">
+                <div className="photo-box">
+                    <Photos photos={photos} />
+                </div>
             </div>
             <footer className="footer">
                 {showLess ? (
@@ -54,7 +56,7 @@ export default function Home({ photoSet }) {
                     <button className="filler"></button>
                 )}
             </footer>
-        </div>
+        </>
     )
 }
 
