@@ -6,15 +6,16 @@ import { addmore } from "lib/config"
 
 import Photos from "components/Photos"
 import Loading from "components/Loading"
-import LoadMore from "components/LoadMore"
-import LoadLess from "components/LoadLess"
+import Footer from "components/Footer"
+// import LoadMore from "components/LoadMore"
+// import LoadLess from "components/LoadLess"
 
 export default function Home({ photoSet }) {
     const { data: session, status } = useSession()
     const loading = status === "loading"
     const [photos, setPhotos] = useState(photoSet)
-    const [showLess, setShowLess] = useState(false)
-    const [showMore, setShowMore] = useState(true)
+    // const [showLess, setShowLess] = useState(false)
+    // const [showMore, setShowMore] = useState(true)
 
     let admin
 
@@ -32,30 +33,7 @@ export default function Home({ photoSet }) {
                     <Photos photos={photos} />
                 </div>
             </div>
-            <footer className="footer">
-                {showLess ? (
-                    <LoadLess
-                        photos={photos}
-                        setPhotos={setPhotos}
-                        setShowLess={setShowLess}
-                        setShowMore={setShowMore}
-                        take={addmore}
-                    />
-                ) : (
-                    <button className="filler"></button>
-                )}
-                {showMore ? (
-                    <LoadMore
-                        photos={photos}
-                        setPhotos={setPhotos}
-                        setShowMore={setShowMore}
-                        setShowLess={setShowLess}
-                        take={addmore}
-                    />
-                ) : (
-                    <button className="filler"></button>
-                )}
-            </footer>
+            <Footer photos={photos} setPhotos={setPhotos} />
         </>
     )
 }
