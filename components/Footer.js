@@ -1,16 +1,20 @@
-import Link from "next/link"
+import { useState } from "react"
+import { addmore } from "lib/config"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
-import { useState } from "react"
+
+import BackOne from "./BackOne"
 import LoadLess from "./LoadLess"
 import LoadMore from "./LoadMore"
-import { addmore } from "lib/config"
+import ForwardOne from "./ForwardOne"
 
 export default function Footer({ photos, setPhotos, showForm, setShowForm }) {
     const { data: session, status } = useSession()
     const [showLess, setShowLess] = useState(false)
     const [showMore, setShowMore] = useState(true)
     const router = useRouter()
+    const photoCode = parseInt(router.asPath.split("/")[2])
+
     let admin = false
 
     if (session && session.user.isAdmin) {
@@ -50,7 +54,11 @@ export default function Footer({ photos, setPhotos, showForm, setShowForm }) {
 
                     {router.asPath !== "/" && (
                         <>
-                            <button>back one here</button>
+                            {photoCode > 1 ? (
+                                <BackOne photoCode={photoCode} />
+                            ) : (
+                                <button className="filler"></button>
+                            )}
                             {admin && (
                                 <>
                                     {showForm ? (
@@ -70,7 +78,8 @@ export default function Footer({ photos, setPhotos, showForm, setShowForm }) {
                                     )}
                                 </>
                             )}
-                            <button>forward one here</button>
+                            {/* TODO calculate last item and render component conditionally */}
+                            <ForwardOne photoCode={photoCode} />
                         </>
                     )}
                 </>

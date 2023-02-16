@@ -45,10 +45,10 @@ export default function Header() {
                     )}
                     {router.asPath !== "/" && (
                         <>
-                            {/* ToDo: set to return to previous page, not home */}
+                            {/* ToDo: set to return to previous gallery page, not home */}
                             <button
                                 className="reroute"
-                                onClick={() => router.back()}
+                                onClick={() => router.push("/")}
                             >
                                 home
                             </button>
