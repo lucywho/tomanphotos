@@ -40,6 +40,9 @@ export default function Photo({ photo }) {
         photo.title ? setPhotoTitle(photo.title) : setPhotoTitle("no title")
 
         photo.info ? setPhotoInfo(photo.info) : setPhotoInfo("no info")
+        photo.decade ? setPhotoDecade(photo.decade) : setPhotoDecade("")
+        photo.year ? setPhotoYear(photo.year) : setPhotoYear("")
+        photo.date ? setPhotoDate(photo.date) : setPhotoDate("")
 
         findDateInfo()
     }, [session, photo])

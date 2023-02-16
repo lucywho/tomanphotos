@@ -17,7 +17,7 @@ export default function Header() {
             <Head>
                 <title>Family Photos</title>
                 <meta name="description" content="family photo site" />
-                <link rel="icon" href="camera.ico" />
+                <link rel="icon" type="image/x-icon" href="/image/camera.ico" />
             </Head>
             <div id="header">
                 <div id="strapline">Our Family Photos</div>

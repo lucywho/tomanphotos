@@ -20,6 +20,8 @@ export default async function handler(req, res) {
     if (!user.isAdmin)
         return res.status(401).json({ message: "user not authorised" })
 
+    const conCode = parseInt(req.body.code)
+
     await prisma.photo.update({
         data: {
             title: req.body.title,
@@ -29,7 +31,7 @@ export default async function handler(req, res) {
             decade: req.body.decade,
         },
         where: {
-            code: req.body.code,
+            code: conCode,
         },
     })
 
