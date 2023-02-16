@@ -131,13 +131,15 @@ a {
     height: fit-content;
     flex-direction: column;
     justify-content: space-between;
-    margin: 30px;
+    margin: 15px;
+    overflow: hidden;
     padding: 20px;
     text-align: center;
 }
 
 .filler {
     visibility: hidden;
+    min-width: 4rem;
 }
 
 /* __SINGLE IMAGE PAGE__ */
@@ -257,6 +259,7 @@ label {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 10px;
     height: var(--footer-height);
 }
 
