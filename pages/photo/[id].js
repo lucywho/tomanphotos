@@ -127,9 +127,12 @@ export default function Photo({ photo }) {
                                 name="decade"
                                 id="decade"
                                 className="info"
+                                value={decade}
                                 onChange={(e) => setPhotoDecade(e.target.value)}
                             >
-                                <option label=" "></option>
+                                <option value="" disabled selected hidden>
+                                    Choose a decade
+                                </option>
                                 <option value="1950-59">1950s</option>
                                 <option value="1960-69">1960s</option>
                                 <option value="1970-79">1970s</option>
@@ -156,6 +159,7 @@ export default function Photo({ photo }) {
                                 type="date"
                                 name="date"
                                 className="info"
+                                value={date}
                                 onChange={(e) => setPhotoDate(e.target.value)}
                             />
                         </div>
