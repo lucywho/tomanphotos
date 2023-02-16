@@ -27,6 +27,8 @@ The current version is _working towards_ step 1:
 -   To improve the ease of use for my parents, anyone logging in with our family email domain is automatically given editing rights, so they don't need to go through an additional verification step.
 -   ... that's it so far.
 
+UPDATE: The Footer is now a separate component that holds the Back/Forward buttons in gallery view. In single image view it holds single image navigation buttons and the Edit button for admins. I also fixed an _extremely weird_ bug in which the Next was calling a single image twice, even in production, but using the favicon as the payload in the second call. Moving the favicon file down a level in file structure fixed it but _I have no idea why_.
+
 ### Next steps
 
 -   Populate database with date information
@@ -38,8 +40,7 @@ The current version is _working towards_ step 1:
 ### Outstanding issues
 
 -   This is a test version and the styling is still fairly basic - designed for viewing on an iPad 6th Gen, looks reasonable on a desktop, looks like crap on a phone.
--   Footer should be a separate component which conditionally displays Back/Forward buttons or Edit buttons.
--   The only way out of the single image view is to return to the first page. Navigation sucks in general.
+-   The only way out of the single image view is to return to the first page of the gallery. I'd like it to go back to the last visited gallery page, regardless of how many single images have been viewed. I need to think about how to achieve this.
 
 ### Built with
 
