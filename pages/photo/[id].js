@@ -39,6 +39,9 @@ export default function Photo({ photo }) {
         photo.title ? setPhotoTitle(photo.title) : setPhotoTitle("no title")
 
         photo.info ? setPhotoInfo(photo.info) : setPhotoInfo("no info")
+        photo.decade ? setPhotoDecade(photo.decade) : setPhotoDecade("")
+        photo.year ? setPhotoYear(photo.year) : setPhotoYear("")
+        photo.date ? setPhotoDate(photo.date) : setPhotoDate("")
 
         findDateInfo()
     }, [session, photo])
@@ -143,7 +146,7 @@ export default function Photo({ photo }) {
                                 name="year"
                                 className="info"
                                 placeholder={
-                                    year ? year : "type a year e.g. 1973"
+                                    !year ? "type a year e.g. 1973" : year
                                 }
                                 onChange={(e) => setPhotoYear(e.target.value)}
                             />
@@ -153,7 +156,6 @@ export default function Photo({ photo }) {
                                 type="date"
                                 name="date"
                                 className="info"
-                                placeholder={date ? date : "date"}
                                 onChange={(e) => setPhotoDate(e.target.value)}
                             />
                         </div>
