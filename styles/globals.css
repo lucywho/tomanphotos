@@ -7,6 +7,7 @@
     --header-height: calc(10vh + 10px);
     --footer-height: calc(5vh + 10px);
     --header-footer-height: calc(var(--header-height) + var(--footer-height));
+    --image-size: 330px;
 }
 
 * {
@@ -21,6 +22,7 @@ body {
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
+    width: 100vw;
 }
 
 a {
@@ -119,22 +121,20 @@ a {
     grid-template-columns: repeat(4, 1fr);
     height: fit-content;
     margin: 0 auto;
-    width: fit-content;
+    min-width: fit-content;
 }
 
 .thumbnail-container {
-    align-items: center;
-    background-color: var(--main-text-color);
+    background-color: #ccf5ac;
+    border: 20px white solid;
     border-radius: 10px;
-    color: var(--main-bg-color);
-    display: flex;
-    height: fit-content;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 15px;
+    height: var(--image-size);
+    width: var(--image-size);
+    margin: 30px;
     overflow: hidden;
-    padding: 20px;
+
     text-align: center;
+    position: relative;
 }
 
 .filler {
@@ -258,8 +258,8 @@ label {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     margin-top: 10px;
+    min-width: 100vw;
     height: var(--footer-height);
 }
 
@@ -273,13 +273,15 @@ label {
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1550px) {
     .contentbox {
         justify-content: center;
     }
 
-    .thumbnail-container {
-        width: 80%;
+    .photo-box {
+        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .photo {
@@ -295,5 +297,40 @@ label {
     .singleinfo {
         width: 100%;
         width: 100vw;
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    #header {
+        padding: 20px;
+        height: 10vh;
+    }
+    #strapline {
+        font-size: 2rem;
+    }
+
+    .sign-in,
+    .sign-out {
+        font-size: 0.75rem;
+    }
+    .photo-box {
+        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .photo-box {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .thumbnail-container {
+        height: 95vw;
+        width: 95vw;
+        margin: 10px 0;
+        border-width: 25px;
     }
 }

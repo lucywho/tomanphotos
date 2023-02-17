@@ -22,68 +22,66 @@ export default function Footer({ photos, setPhotos, showForm, setShowForm }) {
     }
 
     return (
-        <>
-            <div className="footer">
-                <>
-                    {router.asPath === "/" && (
-                        <>
-                            {showLess ? (
-                                <LoadLess
-                                    photos={photos}
-                                    setPhotos={setPhotos}
-                                    setShowLess={setShowLess}
-                                    setShowMore={setShowMore}
-                                    take={addmore}
-                                />
-                            ) : (
-                                <button className="filler"></button>
-                            )}
-                            {showMore ? (
-                                <LoadMore
-                                    photos={photos}
-                                    setPhotos={setPhotos}
-                                    setShowMore={setShowMore}
-                                    setShowLess={setShowLess}
-                                    take={addmore}
-                                />
-                            ) : (
-                                <button className="filler"></button>
-                            )}
-                        </>
-                    )}
+        <div className="footer">
+            <>
+                {router.asPath === "/" && (
+                    <>
+                        {showLess ? (
+                            <LoadLess
+                                photos={photos}
+                                setPhotos={setPhotos}
+                                setShowLess={setShowLess}
+                                setShowMore={setShowMore}
+                                take={addmore}
+                            />
+                        ) : (
+                            <button className="filler"></button>
+                        )}
+                        {showMore ? (
+                            <LoadMore
+                                photos={photos}
+                                setPhotos={setPhotos}
+                                setShowMore={setShowMore}
+                                setShowLess={setShowLess}
+                                take={addmore}
+                            />
+                        ) : (
+                            <button className="filler"></button>
+                        )}
+                    </>
+                )}
 
-                    {router.asPath !== "/" && (
-                        <>
-                            {photoCode > 1 ? (
-                                <BackOne photoCode={photoCode} />
-                            ) : (
-                                <button className="filler"></button>
-                            )}
-                            {admin && (
-                                <>
-                                    {showForm ? (
-                                        <button
-                                            className="edit"
-                                            onClick={() => setShowForm(false)}
-                                        >
-                                            Cancel
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className="edit"
-                                            onClick={() => setShowForm(true)}
-                                        >
-                                            Edit
-                                        </button>
-                                    )}
-                                </>
-                            )}
-                            {/* TODO calculate last item and render component conditionally */}
-                            <ForwardOne photoCode={photoCode} />
-                        </>
-                    )}
-                </>
-            </div>
-        </>
+                {router.asPath !== "/" && (
+                    <>
+                        {photoCode > 1 ? (
+                            <BackOne photoCode={photoCode} />
+                        ) : (
+                            <button className="filler"></button>
+                        )}
+                        {admin && (
+                            <>
+                                {showForm ? (
+                                    <button
+                                        className="edit"
+                                        onClick={() => setShowForm(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="edit"
+                                        onClick={() => setShowForm(true)}
+                                    >
+                                        Edit
+                                    </button>
+                                )}
+                            </>
+                        )}
+                        {/* TODO calculate last item and render component conditionally */}
+                        <ForwardOne photoCode={photoCode} />
+                    </>
+                )}
+            </>
+        </div>
     )
 }
