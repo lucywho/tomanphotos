@@ -6,7 +6,7 @@ export default function Photo({ photo }) {
 
     return (
         <div className="thumbnail-container">
-            <Link href={`/photo/${photo.code}`}>
+            <Link legacyBehavior href={`/photo/${photo.code}`}>
                 <a>
                     {photo.url && (
                         <Image

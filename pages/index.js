@@ -7,16 +7,12 @@ import { addmore } from "lib/config"
 import Photos from "components/Photos"
 import Loading from "components/Loading"
 import Footer from "components/Footer"
-// import LoadMore from "components/LoadMore"
-// import LoadLess from "components/LoadLess"
 
 export default function Home({ photoSet }) {
     const { data: session, status } = useSession()
     const loading = status === "loading"
     const [photos, setPhotos] = useState(photoSet)
-    // const [showLess, setShowLess] = useState(false)
-    // const [showMore, setShowMore] = useState(true)
-
+  
     let admin
 
     if (session) {
