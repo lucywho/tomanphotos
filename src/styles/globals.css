@@ -191,7 +191,8 @@ label {
 }
 
 .update-able,
-.update-disabled {
+.update-disabled,
+.cancel-update {
     background-color: var(--highlight);
     border: 2px solid var(--highlight);
     border-radius: 10px;
@@ -209,6 +210,9 @@ label {
     cursor: not-allowed;
 }
 
+.cancel-update {
+    margin-left: 10px;
+}
 .edit {
     background-color: var(--strap-text);
     border: 1px solid var(--strap-text);

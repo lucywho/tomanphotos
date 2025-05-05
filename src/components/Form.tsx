@@ -64,7 +64,6 @@ export function Form({
                     value={title}
                 />
             </div>
-            <img className="single-photo" src={link} alt={photo.title} />
             <div>
                 <textarea
                     name="info"
@@ -123,6 +122,14 @@ export function Form({
                 }
             >
                 Update
+            </button>
+            <button
+                onClick={() => {
+                    onSave()
+                }}
+                className={"cancel-update update-able"}
+            >
+                Cancel
             </button>
         </form>
     )

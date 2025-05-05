@@ -4,7 +4,7 @@ import { SessionUser } from "../../../lib/types"
 import { getServerSession } from "next-auth"
 import type { Session } from "next-auth"
 import authOptions from "../../../../pages/api/auth/[...nextauth]"
-import { Form } from "../../../components/Form"
+import { EditFormSection } from "./editFormSection"
 import { Footer } from "../../../components"
 import React, { Suspense } from "react"
 
@@ -43,27 +43,5 @@ export default async function PhotoPage({
             </div>
             <Footer photos={photo ? [photo] : []} />
         </div>
-    )
-}
-
-function EditFormSection({ photo }: { photo: any }) {
-    const [showForm, setShowForm] = React.useState(false)
-    if (!showForm) {
-        return (
-            <button className="edit" onClick={() => setShowForm(true)}>
-                Edit this information
-            </button>
-        )
-    }
-    return (
-        <Form
-            photo={photo}
-            initialTitle={photo.title || "no title"}
-            initialInfo={photo.info || "no info"}
-            initialDecade={photo.decade || ""}
-            initialYear={photo.year || ""}
-            initialDate={photo.date || ""}
-            onSave={() => setShowForm(false)}
-        />
     )
 }
