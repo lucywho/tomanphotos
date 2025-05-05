@@ -1,6 +1,6 @@
-import prisma from "lib/prisma"
-import { addmore } from "lib/config"
-import { getPhotos } from "lib/data.js"
+import prisma from "../../src/lib/prisma"
+import { addmore } from "../../src/lib/config"
+import { getPhotos } from "../../src/lib/data.js"
 
 export default async function handler(req, res) {
     if (req.method !== "GET") {

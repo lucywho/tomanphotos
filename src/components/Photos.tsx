@@ -1,6 +1,7 @@
-import Photo from "./Photo"
+import React from "react"
+import { Photo } from "./Photo"
 
-export default function Photos({ photos }) {
+export const Photos = ({ photos }) => {
     if (!photos) return null
 
     return (

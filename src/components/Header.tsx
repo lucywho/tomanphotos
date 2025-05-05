@@ -1,28 +1,37 @@
-import Head from "next/head"
+"use client"
+import React from "react"
 import Link from "next/link"
-import { useRouter } from "next/router"
+import { SessionUser } from "../lib/types"
 import { useSession } from "next-auth/react"
+import { useRouter, usePathname } from "next/navigation"
 
-export default function Header() {
+export const Header = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
+    const pathname = usePathname()
+    const user = session?.user as SessionUser
+
     let admin = false
 
-    if (session && session.user.isAdmin) {
+    if (user?.isAdmin) {
         admin = true
     }
 
     return (
         <>
-            <Head>
-                <title>Family Photos</title>
-                <meta name="description" content="family photo site" />
-                <link rel="icon" type="image/x-icon" href="/image/camera.ico" />
-            </Head>
             <div id="header">
+                <metadata>
+                    <title>Family Photos</title>
+                    <meta name="description" content="family photo site" />
+                    <link
+                        rel="icon"
+                        type="image/x-icon"
+                        href="/image/camera.ico"
+                    />
+                </metadata>
                 <div id="strapline">Our Family Photos</div>
                 <div id="login">
-                    {router.asPath === "/" && (
+                    {pathname === "/" && (
                         <Link
                             href={
                                 session
@@ -43,7 +52,7 @@ export default function Header() {
                             )}
                         </Link>
                     )}
-                    {router.asPath !== "/" && (
+                    {pathname !== "/" && (
                         <>
                             {/* ToDo: set to return to previous gallery page, not home */}
                             <button

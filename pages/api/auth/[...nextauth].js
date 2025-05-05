@@ -1,6 +1,6 @@
-import prisma from "lib/prisma"
+import prisma from "../../../src/lib/prisma"
 import NextAuth from "next-auth"
-import { updateUserToAdmin } from "lib/data.js"
+import { updateUserToAdmin } from "../../../src/lib/data"
 import EmailProvider from "next-auth/providers/email"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 

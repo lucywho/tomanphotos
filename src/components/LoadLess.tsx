@@ -1,12 +1,14 @@
-import { addmore } from "lib/config"
+import React from "react"
+import { ChevronsLeft } from "lucide-react"
+import { addmore } from "../lib/config"
 
-export default function LoadLess({
+export const LoadLess = ({
     photos,
     setPhotos,
     setShowLess,
     setShowMore,
     take,
-}) {
+}) => {
     take = 0 - take
 
     return (
@@ -31,7 +33,7 @@ export default function LoadLess({
                     }
                 }}
             >
-                &lt;&lt;&lt;
+                <ChevronsLeft color="var(--main-bg-color)" />
             </button>
         </div>
     )

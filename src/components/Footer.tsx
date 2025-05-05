@@ -1,30 +1,42 @@
-import { useState } from "react"
-import { addmore } from "lib/config"
-import { useRouter } from "next/router"
+"use client"
+
+import { addmore } from "../lib/config"
+import React, { useState } from "react"
+import { SessionUser, FooterProps } from "../lib/types"
+import { usePathname } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { BackOne, LoadLess, LoadMore, ForwardOne } from "./index"
 
-import BackOne from "./BackOne"
-import LoadLess from "./LoadLess"
-import LoadMore from "./LoadMore"
-import ForwardOne from "./ForwardOne"
-
-export default function Footer({ photos, setPhotos, showForm, setShowForm }) {
+export const Footer = ({
+    photos,
+    setPhotos,
+    showForm,
+    setShowForm,
+}: FooterProps) => {
     const { data: session, status } = useSession()
     const [showLess, setShowLess] = useState(false)
     const [showMore, setShowMore] = useState(true)
-    const router = useRouter()
-    const photoCode = parseInt(router.asPath.split("/")[2])
+    const pathname = usePathname()
+    const user = session?.user as SessionUser
+    // Extract photoCode from pathname if not on root
+    let photoCode = null
+    if (pathname !== "/") {
+        const parts = pathname.split("/")
+        if (parts.length > 2 && parts[2]) {
+            photoCode = parseInt(parts[2])
+        }
+    }
 
     let admin = false
 
-    if (session && session.user.isAdmin) {
+    if (user?.isAdmin) {
         admin = true
     }
 
     return (
         <div className="footer">
             <>
-                {router.asPath === "/" && (
+                {pathname === "/" && (
                     <>
                         {showLess ? (
                             <LoadLess
@@ -51,7 +63,7 @@ export default function Footer({ photos, setPhotos, showForm, setShowForm }) {
                     </>
                 )}
 
-                {router.asPath !== "/" && (
+                {pathname !== "/" && photoCode && (
                     <>
                         {photoCode > 1 ? (
                             <BackOne photoCode={photoCode} />

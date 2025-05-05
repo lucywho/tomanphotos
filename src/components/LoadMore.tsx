@@ -1,10 +1,13 @@
-export default function LoadMore({
+import React from "react"
+import { ChevronsRight } from "lucide-react"
+
+export const LoadMore = ({
     photos,
     setPhotos,
     setShowMore,
     setShowLess,
     take,
-}) {
+}) => {
     return (
         <div>
             <button
@@ -26,7 +29,7 @@ export default function LoadMore({
                     }
                 }}
             >
-                &gt;&gt;&gt;
+                <ChevronsRight color="var(--main-bg-color)" />
             </button>
         </div>
     )
