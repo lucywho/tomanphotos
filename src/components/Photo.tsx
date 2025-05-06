@@ -1,9 +1,10 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { PhotoProps } from "../lib/types"
 
-export const Photo = ({ photo }) => {
-    const link = `https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/${photo.url}`
+export const Photo = ({ photo }: { photo: PhotoProps }) => {
+    const link = `${process.env.BACKUP_LINK}${photo.url}`
 
     return (
         <div className="thumbnail-container">
@@ -14,8 +15,9 @@ export const Photo = ({ photo }) => {
                             className="thumbnail"
                             alt={photo.title ? photo.title : "untitled photo"}
                             src={link}
-                            layout="fill"
-                            objectFit="cover"
+                            fill
+                            style={{ objectFit: "cover" }}
+                            sizes="(max-width: 768px) 100vw, 33vw"
                         />
                     )}
                 </>

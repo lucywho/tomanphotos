@@ -1,3 +1,5 @@
+import { timestamp } from "aws-sdk/clients/cloudfront"
+
 export type SessionUser = {
     name?: string
     email?: string
@@ -6,10 +8,17 @@ export type SessionUser = {
 }
 
 export type PhotoProps = {
+    id: string
     code: number
     title: string
     description: string
     image: string
+    url: string
+    info?: string
+    decade?: string
+    year?: string
+    date?: string
+    createdAt: Date
 }
 
 export type FooterProps = {

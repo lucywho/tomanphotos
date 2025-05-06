@@ -3,7 +3,7 @@ import { getPhoto } from "../../../lib/data"
 import { SessionUser } from "../../../lib/types"
 import { getServerSession } from "next-auth"
 import type { Session } from "next-auth"
-import authOptions from "../../../../pages/api/auth/[...nextauth]"
+import { authOptions } from "../../api/auth/[...nextauth]/route"
 import { EditFormSection } from "./editFormSection"
 import { Footer } from "../../../components"
 import React, { Suspense } from "react"
@@ -13,11 +13,12 @@ export default async function PhotoPage({
 }: {
     params: { id: string }
 }) {
-    const photo = await getPhoto(params.id, prisma)
+    const prms = await params
+    const photo = await getPhoto(prms.id, prisma)
     const session: Session | null = await getServerSession(authOptions)
     const user = session?.user as SessionUser
     const isAdmin = !!user?.isAdmin
-    const link = `https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/${photo.url}`
+    const link = `${process.env.BACKUP_LINK}${photo.url}`
 
     // Helper to get dateInfo
     let dateInfo = photo.date || photo.year || photo.decade || ""
