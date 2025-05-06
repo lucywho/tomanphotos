@@ -2,7 +2,7 @@ import React from "react"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 
-export const ForwardOne = ({ photoCode }) => {
+export const ForwardOne = ({ photoCode }: { photoCode: number }) => {
     const nextPhoto = photoCode + 1
 
     return (

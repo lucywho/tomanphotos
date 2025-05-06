@@ -42,7 +42,7 @@ export default async function PhotoPage({
                 {dateInfo && <p className="info">Date: {dateInfo}</p>}
                 {isAdmin && <EditFormSection photo={photo} />}
             </div>
-            <Footer photos={photo ? [photo] : []} />
+            <Footer photos={photo ? [photo] : []} photoCode={photo.code} />
         </div>
     )
 }

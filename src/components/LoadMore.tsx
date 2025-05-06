@@ -1,5 +1,14 @@
 import React from "react"
 import { ChevronsRight } from "lucide-react"
+import { PhotoProps } from "../lib/types"
+
+interface LoadMoreProps {
+    photos: PhotoProps[]
+    setPhotos: (photos: PhotoProps[]) => void
+    setShowMore: (show: boolean) => void
+    setShowLess: (show: boolean) => void
+    take: number
+}
 
 export const LoadMore = ({
     photos,
@@ -7,7 +16,7 @@ export const LoadMore = ({
     setShowMore,
     setShowLess,
     take,
-}) => {
+}: LoadMoreProps) => {
     return (
         <div>
             <button
@@ -19,12 +28,18 @@ export const LoadMore = ({
                         `/api/photos?take=${take}&cursor=${lastPhotoId}`
                     )
 
-                    photos = await res.json()
+                    if (!res.ok) {
+                        throw new Error(
+                            `Failed to fetch photos: ${res.statusText}`
+                        )
+                    }
 
-                    setPhotos(photos)
+                    const newPhotos: PhotoProps[] = await res.json()
+
+                    setPhotos(newPhotos)
                     setShowLess(true)
 
-                    if (photos.length < take) {
+                    if (newPhotos.length < take) {
                         setShowMore(false)
                     }
                 }}
