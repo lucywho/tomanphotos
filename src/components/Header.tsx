@@ -20,15 +20,9 @@ export const Header = () => {
     return (
         <>
             <div id="header">
-                <metadata>
-                    <title>Family Photos</title>
-                    <meta name="description" content="family photo site" />
-                    <link
-                        rel="icon"
-                        type="image/x-icon"
-                        href="/image/camera.ico"
-                    />
-                </metadata>
+                <title>Family Photos</title>
+                <meta name="description" content="family photo site" />
+                <link rel="icon" type="image/x-icon" href="/image/camera.ico" />
                 <div id="strapline">Our Family Photos</div>
                 <div id="login">
                     {pathname === "/" && (

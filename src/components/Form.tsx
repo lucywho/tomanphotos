@@ -27,7 +27,7 @@ export function Form({
     const [year, setPhotoYear] = useState(initialYear)
     const [date, setPhotoDate] = useState(initialDate)
 
-    const link = `https://slides-backup-20220722.s3.eu-central-1.amazonaws.com/${photo.url}`
+    const link = `${process.env.NEXT_PUBLIC_BACKUP_LINK}${photo.url}`
 
     return (
         <form
