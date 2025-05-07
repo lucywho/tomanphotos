@@ -1,9 +1,7 @@
 "use client"
 
 import React from "react"
-import { ChevronsRight, ChevronsLeft } from "lucide-react"
-import { BackOne } from "./BackOne"
-import { ForwardOne } from "./ForwardOne"
+import { LoadMore, LoadLess, ForwardOne, BackOne } from "./index"
 
 export function Footer({
     photos,
@@ -34,9 +32,7 @@ export function Footer({
         <div className="footer">
             <div className="footer-section-left">
                 {onLoadLess ? (
-                    <button className="load-less" onClick={onLoadLess}>
-                        <ChevronsLeft color="var(--main-bg-color)" />
-                    </button>
+                    <LoadLess onClick={onLoadLess} />
                 ) : (
                     <div className="footer-spacer" />
                 )}
@@ -44,9 +40,7 @@ export function Footer({
             <div className="footer-section-center" />
             <div className="footer-section-right">
                 {onLoadMore ? (
-                    <button className="load-more" onClick={onLoadMore}>
-                        <ChevronsRight color="var(--main-bg-color)" />
-                    </button>
+                    <LoadMore onClick={onLoadMore} />
                 ) : (
                     <div className="footer-spacer" />
                 )}
