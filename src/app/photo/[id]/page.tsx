@@ -6,7 +6,7 @@ import type { Session } from "next-auth"
 import { authOptions } from "../../api/auth/[...nextauth]/route"
 import { EditFormSection } from "./editFormSection"
 import { Footer } from "../../../components"
-import React, { Suspense } from "react"
+import React from "react"
 
 export default async function PhotoPage({
     params,

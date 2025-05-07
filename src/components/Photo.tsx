@@ -5,6 +5,7 @@ import { PhotoProps } from "../lib/types"
 
 export const Photo = ({ photo }: { photo: PhotoProps }) => {
     const link = `${process.env.NEXT_PUBLIC_BACKUP_LINK}${photo.url}`
+    const id = photo.id
 
     return (
         <div className="thumbnail-container">

@@ -1,20 +1,60 @@
 "use client"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { SessionUser } from "../lib/types"
+import { SessionUser, PhotoProps } from "../lib/types"
 import { useSession } from "next-auth/react"
 import { useRouter, usePathname } from "next/navigation"
 
 export const Header = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
-    const pathname = usePathname()
+    let pathname = usePathname()
     const user = session?.user as SessionUser
+    const [photoId, setPhotoId] = useState<string | null>(null)
 
     let admin = false
 
     if (user?.isAdmin) {
         admin = true
+    }
+
+    const getPhotoCodeFromPath = (path: string): string | undefined => {
+        const match = path.match(/^\/photo\/(.+)$/)
+        return match ? match[1] : undefined
+    }
+
+    useEffect(() => {
+        const fetchPhotoId = async () => {
+            const code = pathname ? getPhotoCodeFromPath(pathname) : undefined
+            if (code) {
+                try {
+                    const response = await fetch(
+                        `/api/photo-by-code?code=${code}`
+                    )
+                    if (response.ok) {
+                        const data = await response.json()
+                        setPhotoId(data.id)
+                    } else {
+                        console.error("Failed to fetch photo ID")
+                    }
+                } catch (error) {
+                    console.error("Error fetching photo ID:", error)
+                }
+            }
+        }
+
+        fetchPhotoId()
+    }, [pathname])
+
+    const handleHomeClick = () => {
+        if (photoId) {
+            router.push(`/?id=${photoId}`)
+            setTimeout(() => {
+                window.history.replaceState({}, "", "/")
+            }, 1000)
+        } else {
+            router.push("/")
+        }
     }
 
     return (
@@ -48,10 +88,9 @@ export const Header = () => {
                     )}
                     {pathname !== "/" && (
                         <>
-                            {/* ToDo: set to return to previous gallery page, not home */}
                             <button
                                 className="reroute"
-                                onClick={() => router.push("/")}
+                                onClick={handleHomeClick}
                             >
                                 home
                             </button>
